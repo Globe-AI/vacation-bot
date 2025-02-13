@@ -1,0 +1,105 @@
+REQUEST
+{
+  "api_version": "v1.0",           // Version of the API being called
+  "user_id": "12345",              // Unique identifier for the user
+  "request_id": "abc123",          // Unique identifier for the original recommendation request
+  "current_hotel": {
+    "description": "A luxury hotel near the Eiffel Tower with breathtaking views and spa facilities.", // Description of the hotel to be replaced
+    "location": {
+      "city": "Paris",             // City of the hotel
+      "country": "France"          // Country of the hotel
+    }
+  },
+  "travel_dates": {
+    "start_date": "2025-05-15",    // Check-in date
+    "end_date": "2025-05-22"       // Check-out date
+  },
+  "budget": {
+    "min_price": 100,              // Minimum price per night in the currency
+    "max_price": 500,              // Maximum price per night in the currency
+    "currency": "EUR"              // Currency for budget limits
+  },
+  "preferences": {
+    "rating": 4.5,                 // Minimum rating (e.g., 4.5 or higher)
+    "amenities": ["Free WiFi", "Pool", "Fitness Center"],  // Required amenities
+    "style": "luxury"              // Preferred hotel style (e.g., luxury, boutique)
+  },
+  "traveler_details": {
+    "adults": 2,                   // Number of adults
+    "children": 0                  // Number of children
+  },
+  "query_parameters": {
+    "results_limit": 2             // Number of hotel options to return
+  },
+  "reason_for_substitution": "User prefers hotels with a spa and rooftop views.", // Reason for substitution
+  "substitution_count": 2,         // Number of substitute hotel options to return
+  "llm_model": "gpt-4",            // Which LLM model to send the prompt to (e.g., gpt-4, llama-2)
+  "hotel_inventory_provider": "Expedia" // Provider for hotel inventory (e.g., Expedia, Booking.com, Amadeus)
+}
+
+RESPONSE
+
+{
+  "status": "success",
+  "message": "Hotel substitutions successful.",
+  "data": {
+    "api_version": "v1.0",         // Echoed API version used in the request
+    "request_id": "abc123",        // Echoed request ID for UI consistency
+    "replaced_hotel": {
+      "description": "A luxury hotel near the Eiffel Tower with breathtaking views and spa facilities.",
+      "location": {
+        "city": "Paris",
+        "country": "France"
+      }
+    },
+    "hotels": [
+      {
+        "hotel_id": "H003",
+        "name": "Hotel Paradise",
+        "location": {
+          "city": "Paris",
+          "country": "France",
+          "address": "45 Rue de Rivoli",
+          "coordinates": {
+            "latitude": 48.8566,
+            "longitude": 2.3522
+          }
+        },
+        "description": "A modern hotel in the heart of Paris with scenic views of the city.",
+        "rating": 4.8,
+        "price_per_night": 400,
+        "currency": "EUR",
+        "amenities": ["Free WiFi", "Spa", "Fitness Center"],
+        "availability": {
+          "start_date": "2025-05-15",
+          "end_date": "2025-05-22"
+        },
+        "image_url": "https://example.com/hotel_paradise.jpg"
+      },
+      {
+        "hotel_id": "H004",
+        "name": "Skyline Suites",
+        "location": {
+          "city": "Paris",
+          "country": "France",
+          "address": "99 Boulevard Haussmann",
+          "coordinates": {
+            "latitude": 48.8718,
+            "longitude": 2.3131
+          }
+        },
+        "description": "An upscale hotel offering panoramic rooftop views of the Eiffel Tower.",
+        "rating": 4.7,
+        "price_per_night": 380,
+        "currency": "EUR",
+        "amenities": ["Free Breakfast", "Rooftop Pool", "Spa"],
+        "availability": {
+          "start_date": "2025-05-15",
+          "end_date": "2025-05-22"
+        },
+        "image_url": "https://example.com/skyline_suites.jpg"
+      }
+    ]
+  }
+}
+
