@@ -1,0 +1,58 @@
+{
+  "user_id": "12345",                // Unique identifier for the user
+  "destination": "Paris, France",    // City or destination for the search
+  "prompt": "Find me the best luxury hotels in Paris with a view of the Eiffel Tower and spa facilities.", // Free-format text for LLM
+  "travel_dates": {
+    "start_date": "2025-05-15",      // Check-in date
+    "end_date": "2025-05-22"         // Check-out date
+  },
+  "budget": {
+    "min_price": 100,                // Minimum price per night in the currency
+    "max_price": 500,                // Maximum price per night in the currency
+    "currency": "EUR"                // Currency for budget limits
+  },
+  "preferences": {
+    "rating": 4.5,                   // Minimum rating (e.g., 4.5 or higher)
+    "amenities": ["Free WiFi", "Pool", "Fitness Center"],  // Required amenities
+    "style": "luxury"                // Preferred hotel style (e.g., luxury, boutique)
+  },
+  "traveler_details": {
+    "adults": 2,                     // Number of adults
+    "children": 0                    // Number of children
+  },
+  "query_parameters": {
+    "results_limit": 2               // Number of hotel options to return
+  },
+  "llm": "gpt-4",                    // Which LLM model to send the prompt to (e.g., gpt-4, llama-2)
+  "version": "v1.0",                 // Version of the LLM model
+  "hotel_provider": "Expedia",       // Provider for hotel inventory (e.g., Expedia, Booking.com, Amadeus)
+  "output_format": {
+    "standardized_json": {
+      "hotels": [
+        {
+          "hotel_id": "string",      // Unique identifier for the hotel
+          "name": "string",          // Hotel name
+          "location": {
+            "city": "string",        // City of the hotel
+            "country": "string",     // Country of the hotel
+            "address": "string",     // Address of the hotel
+            "coordinates": {
+              "latitude": "number",  // Latitude of the hotel location
+              "longitude": "number"  // Longitude of the hotel location
+            }
+          },
+          "description": "string",   // Brief description of the hotel
+          "rating": "number",        // Hotel rating (e.g., 4.5)
+          "price_per_night": "number", // Price per night in the specified currency
+          "currency": "string",      // Currency of the price
+          "amenities": ["string"],   // List of hotel amenities
+          "availability": {
+            "start_date": "string",  // Start date of availability
+            "end_date": "string"     // End date of availability
+          },
+          "image_url": "string"      // URL for the hotel's image
+        }
+      ]
+    }
+  }
+}
