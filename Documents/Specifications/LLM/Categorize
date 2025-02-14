@@ -1,0 +1,93 @@
+{
+  "action": "CategorizeTrip",
+  "routing": {
+    "primary_llm": "gpt-4",
+    "fallback_llm": "gpt-3.5",
+    "priority": "high"
+  },
+  "input": {
+    "description": "A 7-day vacation to Paris with a focus on art and culture.",
+    "request_json": {
+      "prompt": "Please categorize this trip based on type and destination."
+    },
+    "expected_output": {
+      "trip_type_categories": {
+        "relaxation_vacations": {
+          "beach_getaway": false,
+          "spa_retreat": false,
+          "staycation": false
+        },
+        "adventure_vacations": {
+          "hiking_trip": false,
+          "extreme_sports": false,
+          "wildlife_safari": false
+        },
+        "cultural_and_historical_vacations": {
+          "city_exploration": true,
+          "heritage_tour": true,
+          "festival": false
+        },
+        "nature_escapes": {
+          "national_park": false,
+          "lake_and_mountain": false,
+          "eco_tourism": false
+        },
+        "cruise_vacations": {
+          "ocean_cruise": false,
+          "river_cruise": false,
+          "expedition_cruise": false
+        },
+        "road_trips": {
+          "coastal_drive": false,
+          "national_scenic_byway": false,
+          "cross_country_adventure": false
+        },
+        "family_vacations": {
+          "theme_park": false,
+          "all_inclusive_resort": false,
+          "camping_or_rving": false
+        },
+        "romantic_getaways": {
+          "couples_retreat": false,
+          "honeymoon_destination": false,
+          "weekend_escape": false
+        },
+        "food_and_wine_tours": {
+          "culinary_trip": true,
+          "wine_region": false
+        },
+        "group_or_friends_trips": {
+          "party_destination": false,
+          "shared_adventure": false,
+          "vacation_home": false
+        },
+        "solo_vacations": {
+          "self_discovery_trip": false,
+          "backpacking": false,
+          "wellness_retreat": false
+        },
+        "volunteering_or_purposeful_travel": {
+          "volunteer_work": false,
+          "pilgrimage": false,
+          "learning_vacation": false
+        },
+        "seasonal_and_festive_vacations": {
+          "winter_getaway": false,
+          "spring_break": false,
+          "fall_leaves": false
+        },
+        "luxury_vacations": {
+          "private_island": false,
+          "first_class_tour": false,
+          "glamping": false
+        }
+      },
+      "destination_type": {
+        "day_trip": false,
+        "international": true,
+        "regional": false,
+        "national": false
+      }
+    }
+  }
+}
