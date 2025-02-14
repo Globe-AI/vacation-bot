@@ -1,0 +1,146 @@
+{
+  "action": "get_hotels",          // Action to perform
+  "user_id": "12345",              // Unique identifier for the user
+  "destination": {
+    "city_name": "Paris",          // Destination city
+    "city_code": "PAR",            // IATA city code
+    "country_code": "FR",          // ISO country code
+    "coordinates": {
+      "latitude": 48.8566,         // Latitude
+      "longitude": 2.3522          // Longitude
+    },
+    "radius": {
+      "value": 10,                 // Search radius
+      "unit": "KM"                 // Radius unit (KM or MI)
+    }
+  },
+  "travel_dates": {
+    "start_date": "2025-05-15",    // Check-in date
+    "end_date": "2025-05-22"       // Check-out date
+  },
+  "budget": {
+    "min_price": 100,              // Minimum price
+    "max_price": 500,              // Maximum price
+    "currency": "EUR"              // Currency
+  },
+  "preferences": {
+    "rating": 4.5,                 // Minimum hotel rating
+    "amenities": ["Free WiFi", "Pool", "Fitness Center"],  // Desired amenities
+    "style": "luxury",             // Hotel style
+    "chain_codes": ["RT", "HY"],   // Preferred hotel chains
+    "brand_codes": ["MC", "SH"]    // Preferred hotel brands
+  },
+  "loyalty_program": {
+    "program_name": "Marriott Bonvoy", // Loyalty program name
+    "membership_number": "MB123456789" // Membership number
+  },
+  "traveler_details": {
+    "adults": 2,                   // Number of adults
+    "children": 0                  // Number of children
+  },
+  "query_parameters": {
+    "results_limit": 5             // Number of results to return
+  },
+  "llm": "gpt-4",                  // Language model to use
+  "version": "v1.0",               // API version
+  "hotel_provider": "Expedia",     // Hotel inventory provider
+  "amadeus_property_code": "XKPAR123", // Amadeus property code
+  "response_format": {             // Embedded response format for consistency
+    "hotels": [
+      {
+        "hotel_id": "string",          // Unique identifier for the hotel
+        "name": "string",              // Hotel name
+        "location": {
+          "city": "string",            // City of the hotel
+          "country": "string",         // Country of the hotel
+          "address": "string",         // Address of the hotel
+          "coordinates": {
+            "latitude": "number",      // Latitude of the hotel location
+            "longitude": "number"      // Longitude of the hotel location
+          }
+        },
+        "description": "string",       // Brief description of the hotel
+        "rating": "number",            // Hotel rating (e.g., 4.5)
+        "price_per_night": "number",   // Price per night in the specified currency
+        "currency": "string",          // Currency of the price
+        "amenities": ["string"],       // List of hotel amenities
+        "availability": {
+          "start_date": "string",      // Start date of availability
+          "end_date": "string"         // End date of availability
+        },
+        "image_url": "string"          // URL for the hotel's image
+      }
+    ]
+  }
+}
+
+{
+  "action": "substitute_hotel",    // Action to perform
+  "api_version": "v1.0",           // API version
+  "user_id": "12345",              // Unique identifier for the user
+  "request_id": "abc123",          // Original recommendation request ID
+  "current_hotel": {
+    "description": "A luxury hotel near the Eiffel Tower with breathtaking views and spa facilities.",
+    "location": {
+      "city": "Paris",
+      "country": "France"
+    }
+  },
+  "travel_dates": {
+    "start_date": "2025-05-15",    // Check-in date
+    "end_date": "2025-05-22"       // Check-out date
+  },
+  "budget": {
+    "min_price": 100,              // Minimum price
+    "max_price": 500,              // Maximum price
+    "currency": "EUR"              // Currency
+  },
+  "preferences": {
+    "rating": 4.5,                 // Minimum rating
+    "amenities": ["Free WiFi", "Pool", "Fitness Center"],  // Desired amenities
+    "style": "luxury",             // Hotel style
+    "chain_codes": ["RT", "HY"],   // Preferred hotel chains
+    "brand_codes": ["MC", "SH"]    // Preferred hotel brands
+  },
+  "traveler_details": {
+    "adults": 2,                   // Number of adults
+    "children": 0                  // Number of children
+  },
+  "query_parameters": {
+    "results_limit": 3             // Number of substitution options
+  },
+  "reason_for_substitution": "User prefers hotels with a spa and rooftop views.", // Reason for substitution
+  "substitution_count": 2,         // Number of substitute options to return
+  "llm_model": "gpt-4",            // Language model to use
+  "hotel_inventory_provider": "Expedia", // Hotel inventory provider
+  "amadeus_property_code": "XKPAR123", // Amadeus property code
+  "response_format": {             // Embedded response format for consistency
+    "hotels": [
+      {
+        "hotel_id": "string",          // Unique identifier for the hotel
+        "name": "string",              // Hotel name
+        "location": {
+          "city": "string",            // City of the hotel
+          "country": "string",         // Country of the hotel
+          "address": "string",         // Address of the hotel
+          "coordinates": {
+            "latitude": "number",      // Latitude of the hotel location
+            "longitude": "number"      // Longitude of the hotel location
+          }
+        },
+        "description": "string",       // Brief description of the hotel
+        "rating": "number",            // Hotel rating (e.g., 4.5)
+        "price_per_night": "number",   // Price per night in the specified currency
+        "currency": "string",          // Currency of the price
+        "amenities": ["string"],       // List of hotel amenities
+        "availability": {
+          "start_date": "string",      // Start date of availability
+          "end_date": "string"         // End date of availability
+        },
+        "image_url": "string"          // URL for the hotel's image
+      }
+    ]
+  }
+}
+
+
