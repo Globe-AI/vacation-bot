@@ -8,7 +8,7 @@
   "input": {
     "description": "A 7-day vacation to Paris with a focus on art and culture.",
     "request_json": {
-      "prompt": "Please categorize this trip based on type and destination."
+      "prompt": "Please categorize this trip based on trip_type_categories and destination_type. Return the output in JSON format based JSON in expected_output. If a category is apprpriate, the flag should be "true" if not "false"
     },
     "expected_output": {
       "trip_type_categories": {
