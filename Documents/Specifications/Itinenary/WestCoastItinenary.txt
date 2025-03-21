@@ -1,0 +1,644 @@
+{
+  "itineraryInfo": {
+    "itineraryName": "West Coast Adventure",
+    "itineraryId": "WCA-2025-001",
+    "travelDates": {
+      "startDate": "2025-06-10",
+      "endDate": "2025-06-20"
+    },
+    "travelerInfo": {
+      "numberOfTravelers": 2,
+      "travelPreferences": ["Urban Exploration", "Culinary", "Outdoors", "Cultural"]
+    }
+  },
+  
+  "cities": [
+    {
+      "cityId": "SF",
+      "name": "San Francisco",
+      "country": "United States",
+      "stayDuration": {
+        "nights": 3,
+        "startDate": "2025-06-10",
+        "endDate": "2025-06-13"
+      },
+      "accommodation": {
+        "name": "Hotel Zetta San Francisco",
+        "type": "Boutique Hotel",
+        "address": "55 5th St, San Francisco, CA 94103",
+        "checkIn": "2025-06-10",
+        "checkOut": "2025-06-13",
+        "roomType": "Premier Studio",
+        "amenities": ["Free WiFi", "Fitness Center", "Restaurant", "Bar", "Game Lounge"]
+      },
+      "activities": [
+        {
+          "activityId": "SF-ACT-001",
+          "name": "Golden Gate Bridge Walk",
+          "category": "Outdoor",
+          "description": "Walk across the iconic Golden Gate Bridge with stunning views of the bay and city",
+          "date": "2025-06-11",
+          "timeSlot": "Morning",
+          "duration": "2 hours",
+          "location": "Golden Gate Bridge",
+          "cost": 0.00,
+          "bookingStatus": "Not Booked",
+          "physicalLevel": "Moderate",
+          "indoorOutdoor": "Outdoor",
+          "notes": "Weather dependent, bring a jacket as it can be windy and foggy"
+        },
+        {
+          "activityId": "SF-ACT-002",
+          "name": "Alcatraz Island Tour",
+          "category": "Historical",
+          "description": "Guided tour of the famous former federal prison on Alcatraz Island",
+          "date": "2025-06-11",
+          "timeSlot": "Afternoon",
+          "duration": "3 hours",
+          "location": "Alcatraz Island",
+          "cost": 41.00,
+          "bookingStatus": "Confirmed",
+          "bookingReference": "ALC25689",
+          "physicalLevel": "Easy to Moderate",
+          "indoorOutdoor": "Both"
+        }
+      ],
+      "pointsOfInterest": [
+        {
+          "poiId": "SF-POI-001",
+          "name": "Fisherman's Wharf",
+          "category": "Entertainment",
+          "address": "Beach Street & The Embarcadero",
+          "description": "Popular waterfront area with shops, restaurants and sea lion colony",
+          "suggestedDuration": "3 hours",
+          "plannedVisitDate": "2025-06-12",
+          "visitPriority": "Must See"
+        },
+        {
+          "poiId": "SF-POI-002",
+          "name": "Lombard Street",
+          "category": "Viewpoint",
+          "address": "Lombard St, San Francisco, CA 94133",
+          "description": "One of the most crooked streets in the world with beautiful gardens",
+          "suggestedDuration": "30 minutes",
+          "plannedVisitDate": "2025-06-12",
+          "visitPriority": "Nice to Have"
+        }
+      ],
+      "restaurants": [
+        {
+          "restaurantId": "SF-REST-001",
+          "name": "Fog Harbor Fish House",
+          "cuisine": "Seafood",
+          "address": "Pier 39, San Francisco, CA 94133",
+          "priceRange": "$$$",
+          "reservation": {
+            "status": "Confirmed",
+            "dateTime": "2025-06-10T19:00:00",
+            "partySize": 2,
+            "bookingReference": "FH645298"
+          },
+          "menuHighlights": ["Clam Chowder in Sourdough Bread Bowl", "Dungeness Crab"],
+          "notes": "100% sustainable seafood restaurant with great views of the bay"
+        },
+        {
+          "restaurantId": "SF-REST-002",
+          "name": "Tartine Manufactory",
+          "cuisine": "Bakery & California Cuisine",
+          "address": "595 Alabama St, San Francisco, CA 94110",
+          "priceRange": "$$",
+          "reservation": {
+            "status": "Not Required",
+            "dateTime": "2025-06-12T09:00:00",
+            "partySize": 2
+          },
+          "menuHighlights": ["Morning Buns", "Country Bread", "Open-face Sandwiches"],
+          "notes": "World-famous bakery, arrive early to avoid lines"
+        }
+      ],
+      "localTransportation": [
+        {
+          "transportType": "Metro/Subway",
+          "routeInfo": "BART and Muni system",
+          "ticketType": "Clipper Card",
+          "costPerRide": 2.50,
+          "passOptions": [
+            {
+              "name": "Visitor Passport",
+              "duration": "3 days",
+              "cost": 36.00,
+              "coverage": "Unlimited rides on Muni, Cable Car, and F-Line"
+            }
+          ],
+          "notes": "Purchase Clipper Card at the airport on arrival"
+        }
+      ]
+    },
+    
+    {
+      "cityId": "PDX",
+      "name": "Portland",
+      "country": "United States",
+      "stayDuration": {
+        "nights": 3,
+        "startDate": "2025-06-13",
+        "endDate": "2025-06-16"
+      },
+      "accommodation": {
+        "name": "Kimpton Hotel Monaco Portland",
+        "type": "Boutique Hotel",
+        "address": "506 SW Washington St, Portland, OR 97204",
+        "checkIn": "2025-06-13",
+        "checkOut": "2025-06-16",
+        "roomType": "King Spa Room",
+        "amenities": ["Free WiFi", "Evening Wine Hour", "Bikes", "Pet Friendly", "Restaurant"]
+      },
+      "activities": [
+        {
+          "activityId": "PDX-ACT-001",
+          "name": "Portland Food Cart Tour",
+          "category": "Food & Drink",
+          "description": "Guided tour of Portland's famous food cart pods",
+          "date": "2025-06-14",
+          "timeSlot": "Lunch",
+          "duration": "3 hours",
+          "location": "Downtown Portland",
+          "cost": 85.00,
+          "bookingStatus": "Confirmed",
+          "bookingReference": "FC78956",
+          "physicalLevel": "Easy",
+          "indoorOutdoor": "Outdoor"
+        },
+        {
+          "activityId": "PDX-ACT-002",
+          "name": "Powell's City of Books Visit",
+          "category": "Cultural",
+          "description": "Self-guided visit to the largest independent bookstore in the world",
+          "date": "2025-06-15",
+          "timeSlot": "Morning",
+          "duration": "2 hours",
+          "location": "1005 W Burnside St, Portland, OR 97209",
+          "cost": 0.00,
+          "bookingStatus": "Not Booked",
+          "physicalLevel": "Easy",
+          "indoorOutdoor": "Indoor"
+        }
+      ],
+      "pointsOfInterest": [
+        {
+          "poiId": "PDX-POI-001",
+          "name": "Portland Japanese Garden",
+          "category": "Cultural",
+          "address": "611 SW Kingston Ave, Portland, OR 97205",
+          "description": "Authentic 12-acre Japanese garden with beautiful views of Mt. Hood",
+          "suggestedDuration": "2 hours",
+          "entryFee": 18.95,
+          "plannedVisitDate": "2025-06-14",
+          "visitPriority": "Must See"
+        },
+        {
+          "poiId": "PDX-POI-002",
+          "name": "Portland Saturday Market",
+          "category": "Shopping",
+          "address": "2 SW Naito Pkwy, Portland, OR 97204",
+          "description": "Large outdoor arts and crafts market operating since 1974",
+          "suggestedDuration": "1.5 hours",
+          "entryFee": 0.00,
+          "plannedVisitDate": "2025-06-15",
+          "visitPriority": "Nice to Have",
+          "notes": "Only operates Saturday and Sunday"
+        }
+      ],
+      "restaurants": [
+        {
+          "restaurantId": "PDX-REST-001",
+          "name": "Pok Pok",
+          "cuisine": "Thai",
+          "address": "3226 SE Division St, Portland, OR 97202",
+          "priceRange": "$$",
+          "reservation": {
+            "status": "Confirmed",
+            "dateTime": "2025-06-13T19:30:00",
+            "partySize": 2,
+            "bookingReference": "PP123456"
+          },
+          "menuHighlights": ["Ike's Vietnamese Fish Sauce Wings", "Papaya Salad", "Khao Soi"],
+          "notes": "James Beard award-winning chef, can be busy"
+        },
+        {
+          "restaurantId": "PDX-REST-002",
+          "name": "Voodoo Doughnut",
+          "cuisine": "Bakery",
+          "address": "22 SW 3rd Ave, Portland, OR 97204",
+          "priceRange": "$",
+          "reservation": {
+            "status": "Not Required",
+            "dateTime": "2025-06-15T10:00:00",
+            "partySize": 2
+          },
+          "menuHighlights": ["Bacon Maple Bar", "Voodoo Doll Doughnut", "Portland Cream"],
+          "notes": "Open 24 hours, often has a line"
+        }
+      ]
+    },
+    
+    {
+      "cityId": "SEA",
+      "name": "Seattle",
+      "country": "United States",
+      "stayDuration": {
+        "nights": 4,
+        "startDate": "2025-06-16",
+        "endDate": "2025-06-20"
+      },
+      "accommodation": {
+        "name": "Thompson Seattle",
+        "type": "Luxury Hotel",
+        "address": "110 Stewart St, Seattle, WA 98101",
+        "checkIn": "2025-06-16",
+        "checkOut": "2025-06-20",
+        "roomType": "Water View King",
+        "amenities": ["Free WiFi", "Rooftop Bar", "Restaurant", "24-hour Fitness Center", "Concierge"]
+      },
+      "activities": [
+        {
+          "activityId": "SEA-ACT-001",
+          "name": "Space Needle Observation Deck",
+          "category": "Sightseeing",
+          "description": "Visit the iconic Seattle landmark with 360° views of the city",
+          "date": "2025-06-17",
+          "timeSlot": "Morning",
+          "duration": "1.5 hours",
+          "location": "400 Broad St, Seattle, WA 98109",
+          "cost": 37.50,
+          "bookingStatus": "Confirmed",
+          "bookingReference": "SN908765",
+          "physicalLevel": "Easy",
+          "indoorOutdoor": "Both"
+        },
+        {
+          "activityId": "SEA-ACT-002",
+          "name": "Chihuly Garden and Glass",
+          "category": "Cultural",
+          "description": "Exhibition of glass artist Dale Chihuly's work",
+          "date": "2025-06-17",
+          "timeSlot": "Afternoon",
+          "duration": "2 hours",
+          "location": "305 Harrison St, Seattle, WA 98109",
+          "cost": 32.00,
+          "bookingStatus": "Confirmed",
+          "bookingReference": "CG456789",
+          "physicalLevel": "Easy",
+          "indoorOutdoor": "Both"
+        },
+        {
+          "activityId": "SEA-ACT-003",
+          "name": "Pike Place Market Food Tour",
+          "category": "Food & Drink",
+          "description": "Guided tour of the historic market with food tastings",
+          "date": "2025-06-18",
+          "timeSlot": "Morning",
+          "duration": "2.5 hours",
+          "location": "Pike Place Market",
+          "cost": 59.00,
+          "bookingStatus": "Confirmed",
+          "bookingReference": "PM234567",
+          "physicalLevel": "Easy",
+          "indoorOutdoor": "Both"
+        }
+      ],
+      "tours": [
+        {
+          "tourId": "SEA-TOUR-001",
+          "name": "Bainbridge Island Day Trip",
+          "operator": "Emerald City Tours",
+          "description": "Ferry trip to scenic Bainbridge Island with wine tasting and shopping",
+          "bookingStatus": "Confirmed",
+          "dateTime": "2025-06-19T09:00:00",
+          "duration": "8 hours",
+          "meetingPoint": "Seattle Ferry Terminal",
+          "endPoint": "Seattle Ferry Terminal",
+          "included": ["Ferry Tickets", "Guide", "Wine Tasting", "Lunch"],
+          "cost": 149.00,
+          "bookingReference": "BI567890",
+          "groupSize": "Small (max 12 people)",
+          "guideLanguage": ["English"]
+        }
+      ],
+      "pointsOfInterest": [
+        {
+          "poiId": "SEA-POI-001",
+          "name": "Pike Place Market",
+          "category": "Shopping",
+          "address": "85 Pike St, Seattle, WA 98101",
+          "description": "Historic farmers market overlooking Elliott Bay",
+          "suggestedDuration": "2 hours",
+          "plannedVisitDate": "2025-06-18",
+          "visitPriority": "Must See"
+        },
+        {
+          "poiId": "SEA-POI-002",
+          "name": "Olympic Sculpture Park",
+          "category": "Cultural",
+          "address": "2901 Western Ave, Seattle, WA 98121",
+          "description": "Outdoor sculpture museum with waterfront views",
+          "suggestedDuration": "1 hour",
+          "entryFee": 0.00,
+          "plannedVisitDate": "2025-06-19",
+          "visitPriority": "Nice to Have"
+        }
+      ],
+      "restaurants": [
+        {
+          "restaurantId": "SEA-REST-001",
+          "name": "The Walrus and the Carpenter",
+          "cuisine": "Seafood",
+          "address": "4743 Ballard Ave NW, Seattle, WA 98107",
+          "priceRange": "$$$",
+          "reservation": {
+            "status": "Confirmed",
+            "dateTime": "2025-06-16T19:00:00",
+            "partySize": 2,
+            "bookingReference": "WC345678"
+          },
+          "menuHighlights": ["Oysters", "Steak Tartare", "Seafood Charcuterie"],
+          "notes": "Award-winning oyster bar, reservations essential"
+        },
+        {
+          "restaurantId": "SEA-REST-002",
+          "name": "Serious Pie",
+          "cuisine": "Pizza",
+          "address": "316 Virginia St, Seattle, WA 98101",
+          "priceRange": "$$",
+          "reservation": {
+            "status": "Not Required",
+            "dateTime": "2025-06-18T18:30:00",
+            "partySize": 2
+          },
+          "menuHighlights": ["Sweet Fennel Sausage Pizza", "Roasted Mushroom Pizza"],
+          "notes": "Tom Douglas restaurant with artisan wood-fired pizzas"
+        }
+      ]
+    }
+  ],
+  
+  "intraCityTransportation": [
+    {
+      "transportId": "TRANS-001",
+      "fromCity": "SF",
+      "toCity": "PDX",
+      "transportType": "Flight",
+      "commonDetails": {
+        "departureDateTime": "2025-06-13T10:15:00",
+        "arrivalDateTime": "2025-06-13T12:05:00",
+        "duration": "1h 50m",
+        "distance": "550 miles",
+        "bookingReference": "AL123456",
+        "bookingStatus": "Confirmed",
+        "cost": 195.00,
+        "baggageAllowance": "1 checked bag per person"
+      },
+      "flight": {
+        "airline": "Alaska Airlines",
+        "flightNumber": "AS346",
+        "departureAirport": {
+          "name": "San Francisco International Airport",
+          "code": "SFO",
+          "terminal": "Terminal 2",
+          "gate": "D5"
+        },
+        "arrivalAirport": {
+          "name": "Portland International Airport",
+          "code": "PDX",
+          "terminal": "Main Terminal",
+          "gate": "C12"
+        },
+        "seatAssignment": "14A, 14B",
+        "class": "Economy",
+        "amenities": ["In-flight WiFi", "Complimentary Soft Drinks"]
+      },
+      "restaurants": [
+        {
+          "name": "Taste on the Fly",
+          "cuisine": "American",
+          "location": "SFO Terminal 2",
+          "priceRange": "$$",
+          "recommendedDishes": ["Breakfast Sandwich", "Fresh Salads"],
+          "openingHours": "5:00 AM - 10:00 PM",
+          "notes": "Good pre-flight option for breakfast or light meals"
+        }
+      ]
+    },
+    {
+      "transportId": "TRANS-002",
+      "fromCity": "PDX",
+      "toCity": "SEA",
+      "transportType": "Train",
+      "commonDetails": {
+        "departureDateTime": "2025-06-16T09:45:00",
+        "arrivalDateTime": "2025-06-16T13:50:00",
+        "duration": "4h 05m",
+        "distance": "180 miles",
+        "bookingReference": "AM783459",
+        "bookingStatus": "Confirmed",
+        "cost": 78.00
+      },
+      "train": {
+        "operator": "Amtrak",
+        "trainNumber": "Cascades 504",
+        "trainType": "Intercity",
+        "class": "Business Class",
+        "departureStation": {
+          "name": "Portland Union Station",
+          "address": "800 NW 6th Ave, Portland, OR 97209",
+          "platform": "Track 3"
+        },
+        "arrivalStation": {
+          "name": "Seattle King Street Station",
+          "address": "303 S Jackson St, Seattle, WA 98104",
+          "platform": "Track 2"
+        },
+        "seatAssignment": "Car 3, Seats 12A, 12B",
+        "amenities": ["Café Car", "Free WiFi", "Power Outlets"]
+      },
+      "pointsOfInterest": [
+        {
+          "name": "Mount St. Helens",
+          "type": "Natural",
+          "location": "Visible from train on the right side",
+          "distanceFromRoute": "Visible distance",
+          "description": "Active stratovolcano in the Cascade Range",
+          "recommendation": "Sit on the right side of the train (facing forward) for the best views"
+        },
+        {
+          "name": "Tacoma",
+          "type": "Urban",
+          "location": "Station stop along the route",
+          "description": "City with beautiful Commencement Bay views and Glass Museum",
+          "visitDuration": "Briefly visible during station stop"
+        }
+      ],
+      "scenicRoadway": {
+        "routeName": "Cascades Route",
+        "routeDescription": "Scenic rail journey along the Pacific Northwest corridor",
+        "scenicHighlights": ["Puget Sound Views", "Mount St. Helens (weather permitting)", "Columbia River"]
+      }
+    }
+  ],
+  
+  "costs": {
+    "estimated": {
+      "currency": "USD",
+      "totalEstimatedCost": 4326.00,
+      "cityCosts": [
+        {
+          "cityId": "SF",
+          "accommodation": 897.00,
+          "foodAndDining": 350.00,
+          "activities": 82.00,
+          "localTransportation": 72.00,
+          "shopping": 150.00,
+          "misc": 50.00,
+          "subtotal": 1601.00
+        },
+        {
+          "cityId": "PDX",
+          "accommodation": 765.00,
+          "foodAndDining": 280.00,
+          "activities": 85.00,
+          "localTransportation": 45.00,
+          "shopping": 120.00,
+          "misc": 40.00,
+          "subtotal": 1335.00
+        },
+        {
+          "cityId": "SEA",
+          "accommodation": 1156.00,
+          "foodAndDining": 420.00,
+          "activities": 277.50,
+          "localTransportation": 60.00,
+          "shopping": 180.00,
+          "misc": 60.00,
+          "subtotal": 2153.50
+        }
+      ],
+      "intraCityCosts": [
+        {
+          "transportId": "TRANS-001",
+          "route": "SF to PDX",
+          "carrier": "Alaska Airlines",
+          "cost": 195.00,
+          "fees": {
+            "baseFare": 155.00,
+            "taxes": 40.00,
+            "baggageFees": 0.00
+          }
+        },
+        {
+          "transportId": "TRANS-002",
+          "route": "PDX to SEA",
+          "carrier": "Amtrak",
+          "cost": 78.00,
+          "fees": {
+            "baseFare": 63.00,
+            "taxes": 15.00,
+            "baggageFees": 0.00
+          }
+        }
+      ],
+      "categoryCosts": {
+        "accommodation": 2818.00,
+        "transportation": {
+          "flights": 195.00,
+          "train": 78.00,
+          "localTransport": 177.00,
+          "subtotal": 450.00
+        },
+        "foodAndDining": 1050.00,
+        "activities": 444.50,
+        "shopping": 450.00,
+        "misc": 150.00
+      }
+    },
+    "actual": {
+      "currency": "USD",
+      "totalActualCost": 0.00,
+      "cityCosts": [
+        {
+          "cityId": "SF",
+          "accommodation": 0.00,
+          "foodAndDining": 0.00,
+          "activities": 0.00,
+          "localTransportation": 0.00,
+          "shopping": 0.00,
+          "misc": 0.00,
+          "subtotal": 0.00
+        },
+        {
+          "cityId": "PDX",
+          "accommodation": 0.00,
+          "foodAndDining": 0.00,
+          "activities": 0.00,
+          "localTransportation": 0.00,
+          "shopping": 0.00,
+          "misc": 0.00,
+          "subtotal": 0.00
+        },
+        {
+          "cityId": "SEA",
+          "accommodation": 0.00,
+          "foodAndDining": 0.00,
+          "activities": 0.00,
+          "localTransportation": 0.00,
+          "shopping": 0.00,
+          "misc": 0.00,
+          "subtotal": 0.00
+        }
+      ],
+      "intraCityCosts": [
+        {
+          "transportId": "TRANS-001",
+          "route": "SF to PDX",
+          "carrier": "Alaska Airlines",
+          "cost": 0.00,
+          "fees": {
+            "baseFare": 0.00,
+            "taxes": 0.00,
+            "baggageFees": 0.00
+          }
+        },
+        {
+          "transportId": "TRANS-002",
+          "route": "PDX to SEA",
+          "carrier": "Amtrak",
+          "cost": 0.00,
+          "fees": {
+            "baseFare": 0.00,
+            "taxes": 0.00,
+            "baggageFees": 0.00
+          }
+        }
+      ],
+      "categoryCosts": {
+        "accommodation": 0.00,
+        "transportation": {
+          "flights": 0.00,
+          "train": 0.00,
+          "localTransport": 0.00,
+          "subtotal": 0.00
+        },
+        "foodAndDining": 0.00,
+        "activities": 0.00,
+        "shopping": 0.00,
+        "misc": 0.00
+      }
+    }
+  },
+  
+  "metadata": {
+    "createdDate": "2025-03-20",
+    "lastModifiedDate": "2025-03-20",
+    "version": "1.0",
+    "status": "Draft"
+  }
+}
