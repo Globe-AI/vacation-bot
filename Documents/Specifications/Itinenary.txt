@@ -2,234 +2,1081 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Travel Itinerary Schema",
   "type": "object",
-  "required": [
-    "itineraryInfo",
-    "cities",
-    "intraCityTransportation",
-    "costs",
-    "metadata"
-  ],
+  "required": ["itineraryInfo", "cities", "intraCityTransportation", "costs", "metadata"],
   "properties": {
-    "metadata": {
+    "itineraryInfo": {
       "type": "object",
+      "description": "General information about the itinerary",
+      "required": ["itineraryName", "itineraryId", "travelDates", "travelerInfo"],
       "properties": {
-        "language": {
-          "type": "string",
-          "description": "Language code (e.g., en, fr, es)"
+        "itineraryName": { "type": "string" },
+        "itineraryId": { "type": "string" },
+        "itineraryUrl": { "type": "string", "format": "uri" },
+        "travelDates": {
+          "type": "object",
+          "properties": {
+            "startDate": { "type": "string", "format": "date" },
+            "endDate": { "type": "string", "format": "date" }
+          }
         },
-        "locale": {
-          "type": "string",
-          "description": "Locale for formatting (e.g., en-US, fr-FR)"
+        "travelerInfo": {
+          "type": "object",
+          "properties": {
+            "numberOfTravelers": { "type": "integer", "minimum": 1 },
+            "travelPreferences": { "type": "array", "items": { "type": "string" } }
+          }
         }
       }
     },
     "cities": {
       "type": "array",
+      "description": "List of cities in the itinerary",
       "items": {
         "type": "object",
+        "required": ["cityId", "name", "stayDuration"],
         "properties": {
-          "name": {
-            "type": "string"
+          "cityId": { "type": "string" },
+          "name": { "type": "string" },
+          "country": { "type": "string" },
+          "stayDuration": {
+            "type": "object",
+            "properties": {
+              "nights": { "type": "integer", "minimum": 0 },
+              "startDate": { "type": "string", "format": "date" },
+              "endDate": { "type": "string", "format": "date" }
+            }
           },
           "accommodation": {
             "type": "object",
             "properties": {
-              "latitude": {
-                "type": "number",
-                "description": "Latitude"
-              },
-              "longitude": {
-                "type": "number",
-                "description": "Longitude"
-              },
-              "imageUrl": {
-                "type": "string",
-                "format": "uri",
-                "description": "Image URL"
-              },
-              "website": {
-                "type": "string",
-                "format": "uri",
-                "description": "Website URL"
-              }
+              "name": { "type": "string" },
+              "type": { "type": "string" },
+              "address": { "type": "string" },
+              "checkIn": { "type": "string", "format": "date" },
+              "checkOut": { "type": "string", "format": "date" },
+              "roomType": { "type": "string" },
+              "amenities": { "type": "array", "items": { "type": "string" } },
+              "latitude": { "type": "number", "description": "Latitude" },
+              "longitude": { "type": "number", "description": "Longitude" },
+              "imageUrl": { "type": "string", "format": "uri", "description": "Image URL" },
+              "website": { "type": "string", "format": "uri", "description": "Website URL" }
             }
           },
           "pointsOfInterest": {
             "type": "array",
+            "description": "Notable landmarks, attractions, and places to visit",
             "items": {
               "type": "object",
               "properties": {
-                "latitude": {
-                  "type": "number",
-                  "description": "Latitude"
-                },
-                "longitude": {
-                  "type": "number",
-                  "description": "Longitude"
-                },
-                "imageUrl": {
-                  "type": "string",
-                  "format": "uri",
-                  "description": "Image URL"
-                },
-                "website": {
-                  "type": "string",
-                  "format": "uri",
-                  "description": "Website URL"
-                }
+                "poiId": { "type": "string" },
+                "name": { "type": "string" },
+                "category": { "type": "string", "enum": ["Historical", "Natural", "Cultural", "Religious", "Entertainment", "Shopping", "Viewpoint", "Other"] },
+                "address": { "type": "string" },
+                "description": { "type": "string" },
+                "suggestedDuration": { "type": "string" },
+                "openingHours": { "type": "string" },
+                "entryFee": { "type": "number" },
+                "plannedVisitDate": { "type": "string", "format": "date" },
+                "plannedVisitTime": { "type": "string" },
+                "distance": { "type": "string", "description": "Distance from accommodation" },
+                "transportation": { "type": "string", "description": "How to get there" },
+                "notes": { "type": "string" },
+                "rating": { "type": "number", "minimum": 0, "maximum": 5 },
+                "popularity": { "type": "string", "enum": ["Low", "Medium", "High"] },
+                "visitPriority": { "type": "string", "enum": ["Must See", "Nice to Have", "If Time Permits"] },
+                "latitude": { "type": "number", "description": "Latitude" },
+                "longitude": { "type": "number", "description": "Longitude" },
+                "imageUrl": { "type": "string", "format": "uri", "description": "Image URL" },
+                "website": { "type": "string", "format": "uri", "description": "Website URL" }
               }
             }
           },
           "restaurants": {
             "type": "array",
+            "description": "Dining establishments and food experiences",
             "items": {
               "type": "object",
               "properties": {
-                "latitude": {
-                  "type": "number",
-                  "description": "Latitude"
+                "restaurantId": { "type": "string" },
+                "name": { "type": "string" },
+                "cuisine": { "type": "string" },
+                "address": { "type": "string" },
+                "priceRange": { "type": "string", "enum": ["$", "$$", "$$$", "$$$$"] },
+                "reservation": {
+                  "type": "object",
+                  "properties": {
+                    "status": { "type": "string", "enum": ["Confirmed", "Pending", "Not Required", "Not Made"] },
+                    "dateTime": { "type": "string", "format": "date-time" },
+                    "partySize": { "type": "integer" },
+                    "bookingReference": { "type": "string" },
+                    "specialRequests": { "type": "string" }
+                  }
                 },
-                "longitude": {
-                  "type": "number",
-                  "description": "Longitude"
-                },
-                "imageUrl": {
-                  "type": "string",
-                  "format": "uri",
-                  "description": "Image URL"
-                },
-                "website": {
-                  "type": "string",
-                  "format": "uri",
-                  "description": "Website URL"
-                }
+                "menuHighlights": { "type": "array", "items": { "type": "string" } },
+                "dietaryOptions": { "type": "array", "items": { "type": "string" } },
+                "distance": { "type": "string", "description": "Distance from accommodation" },
+                "transportation": { "type": "string", "description": "How to get there" },
+                "rating": { "type": "number", "minimum": 0, "maximum": 5 },
+                "recommendedBy": { "type": "string" },
+                "notes": { "type": "string" },
+                "latitude": { "type": "number", "description": "Latitude" },
+                "longitude": { "type": "number", "description": "Longitude" },
+                "imageUrl": { "type": "string", "format": "uri", "description": "Image URL" },
+                "website": { "type": "string", "format": "uri", "description": "Website URL" }
               }
             }
           },
           "tours": {
             "type": "array",
+            "description": "Guided experiences and organized excursions",
             "items": {
               "type": "object",
               "properties": {
-                "latitude": {
-                  "type": "number",
-                  "description": "Latitude"
-                },
-                "longitude": {
-                  "type": "number",
-                  "description": "Longitude"
-                },
-                "imageUrl": {
-                  "type": "string",
-                  "format": "uri",
-                  "description": "Image URL"
-                },
-                "website": {
-                  "type": "string",
-                  "format": "uri",
-                  "description": "Website URL"
-                }
+                "tourId": { "type": "string" },
+                "name": { "type": "string" },
+                "operator": { "type": "string" },
+                "description": { "type": "string" },
+                "bookingStatus": { "type": "string", "enum": ["Confirmed", "Pending", "Not Booked"] },
+                "dateTime": { "type": "string", "format": "date-time" },
+                "duration": { "type": "string" },
+                "meetingPoint": { "type": "string" },
+                "endPoint": { "type": "string" },
+                "included": { "type": "array", "items": { "type": "string" } },
+                "excluded": { "type": "array", "items": { "type": "string" } },
+                "cost": { "type": "number" },
+                "perPerson": { "type": "boolean" },
+                "bookingReference": { "type": "string" },
+                "groupSize": { "type": "string" },
+                "guideLanguage": { "type": "array", "items": { "type": "string" } },
+                "specialRequirements": { "type": "string" },
+                "cancellationPolicy": { "type": "string" },
+                "notes": { "type": "string" },
+                "latitude": { "type": "number", "description": "Latitude" },
+                "longitude": { "type": "number", "description": "Longitude" },
+                "imageUrl": { "type": "string", "format": "uri", "description": "Image URL" },
+                "website": { "type": "string", "format": "uri", "description": "Website URL" }
               }
             }
           },
           "activities": {
             "type": "array",
+            "description": "Self-guided activities and experiences",
             "items": {
               "type": "object",
               "properties": {
-                "latitude": {
-                  "type": "number",
-                  "description": "Latitude"
-                },
-                "longitude": {
-                  "type": "number",
-                  "description": "Longitude"
-                },
-                "imageUrl": {
-                  "type": "string",
-                  "format": "uri",
-                  "description": "Image URL"
-                },
-                "website": {
-                  "type": "string",
-                  "format": "uri",
-                  "description": "Website URL"
-                }
+                "activityId": { "type": "string" },
+                "name": { "type": "string" },
+                "category": { "type": "string", "enum": ["Adventure", "Cultural", "Relaxation", "Educational", "Sporting", "Entertainment", "Nature", "Water", "Winter", "Other"] },
+                "description": { "type": "string" },
+                "date": { "type": "string", "format": "date" },
+                "timeSlot": { "type": "string" },
+                "duration": { "type": "string" },
+                "location": { "type": "string" },
+                "address": { "type": "string" },
+                "cost": { "type": "number" },
+                "bookingStatus": { "type": "string", "enum": ["Confirmed", "Pending", "Not Booked"] },
+                "bookingReference": { "type": "string" },
+                "ticketType": { "type": "string" },
+                "equipmentNeeded": { "type": "array", "items": { "type": "string" } },
+                "physicalLevel": { "type": "string", "enum": ["Easy", "Moderate", "Difficult", "Extreme"] },
+                "suitableFor": { "type": "array", "items": { "type": "string" } },
+                "weatherDependent": { "type": "boolean" },
+                "indoorOutdoor": { "type": "string", "enum": ["Indoor", "Outdoor", "Both"] },
+                "notes": { "type": "string" },
+                "latitude": { "type": "number", "description": "Latitude" },
+                "longitude": { "type": "number", "description": "Longitude" },
+                "imageUrl": { "type": "string", "format": "uri", "description": "Image URL" },
+                "website": { "type": "string", "format": "uri", "description": "Website URL" }
               }
             }
           },
-          "latitude": {
-            "type": "number",
-            "description": "Latitude"
+          "carRentals": {
+            "type": "array",
+            "description": "Vehicle rentals for local transportation",
+            "items": {
+              "type": "object",
+              "properties": {
+                "rentalId": { "type": "string" },
+                "company": { "type": "string" },
+                "pickupLocation": { "type": "string" },
+                "pickupDateTime": { "type": "string", "format": "date-time" },
+                "dropoffLocation": { "type": "string" },
+                "dropoffDateTime": { "type": "string", "format": "date-time" },
+                "vehicleType": { "type": "string" },
+                "vehicleModel": { "type": "string" },
+                "bookingStatus": { "type": "string", "enum": ["Confirmed", "Pending", "Not Booked"] },
+                "bookingReference": { "type": "string" },
+                "cost": {
+                  "type": "object",
+                  "properties": {
+                    "baseRate": { "type": "number" },
+                    "insurance": { "type": "number" },
+                    "additionalDrivers": { "type": "number" },
+                    "extras": { "type": "number" },
+                    "totalEstimated": { "type": "number" }
+                  }
+                },
+                "insuranceDetails": { "type": "string" },
+                "additionalDrivers": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": { "type": "string" },
+                      "drivingLicense": { "type": "string" }
+                    }
+                  }
+                },
+                "specialRequirements": { "type": "array", "items": { "type": "string" } },
+                "includedMileage": { "type": "string" },
+                "fuelPolicy": { "type": "string" },
+                "notes": { "type": "string" },
+                "latitude": { "type": "number", "description": "Latitude" },
+                "longitude": { "type": "number", "description": "Longitude" },
+                "imageUrl": { "type": "string", "format": "uri", "description": "Image URL" },
+                "website": { "type": "string", "format": "uri", "description": "Website URL" }
+              }
+            }
           },
-          "longitude": {
-            "type": "number",
-            "description": "Longitude"
+          "localTransportation": {
+            "type": "array",
+            "description": "Public transport options within the city",
+            "items": {
+              "type": "object",
+              "properties": {
+                "transportType": { "type": "string", "enum": ["Metro/Subway", "Bus", "Tram", "Ferry", "Taxi", "Rideshare", "Bike Rental", "Other"] },
+                "routeInfo": { "type": "string" },
+                "ticketType": { "type": "string" },
+                "costPerRide": { "type": "number" },
+                "passOptions": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": { "type": "string" },
+                      "duration": { "type": "string" },
+                      "cost": { "type": "number" },
+                      "coverage": { "type": "string" }
+                    }
+                  }
+                },
+                "operatingHours": { "type": "string" },
+                "frequencyOfService": { "type": "string" },
+                "recommendedFor": { "type": "array", "items": { "type": "string" } },
+                "accessibilityInfo": { "type": "string" },
+                "notes": { "type": "string" }
+              }
+            }
           },
-          "imageUrl": {
-            "type": "string",
-            "format": "uri",
-            "description": "Image URL"
-          },
-          "website": {
-            "type": "string",
-            "format": "uri",
-            "description": "Website URL"
-          }
+          "latitude": { "type": "number", "description": "Latitude" },
+          "longitude": { "type": "number", "description": "Longitude" },
+          "imageUrl": { "type": "string", "format": "uri", "description": "Image URL" },
+          "website": { "type": "string", "format": "uri", "description": "Website URL" }
         }
       }
     },
     "intraCityTransportation": {
       "type": "array",
+      "description": "Transportation between cities",
       "items": {
         "type": "object",
+        "required": ["transportId", "fromCity", "toCity", "transportType"],
         "properties": {
+          "transportId": { "type": "string" },
+          "fromCity": { "type": "string" },
+          "toCity": { "type": "string" },
+          "transportType": { 
+            "type": "string", 
+            "enum": ["Flight", "Train", "Bus", "Rental Car", "Ferry", "Cruise", "Scenic Roadway", "Taxi", "Other"] 
+          },
+          "commonDetails": {
+            "type": "object",
+            "description": "Common details applicable to all transport types",
+            "properties": {
+              "departureDateTime": { "type": "string", "format": "date-time" },
+              "arrivalDateTime": { "type": "string", "format": "date-time" },
+              "duration": { "type": "string" },
+              "distance": { "type": "string" },
+              "bookingReference": { "type": "string" },
+              "bookingStatus": { "type": "string", "enum": ["Confirmed", "Pending", "Not Booked"] },
+              "cost": { "type": "number" },
+              "notes": { "type": "string" },
+              "weatherConsiderations": { "type": "string" },
+              "carbonFootprint": { "type": "string" },
+              "baggageAllowance": { "type": "string" }
+            }
+          },
           "flight": {
             "type": "object",
+            "description": "Flight-specific details",
             "properties": {
+              "airline": { "type": "string" },
+              "flightNumber": { "type": "string" },
               "departureAirport": {
                 "type": "object",
                 "properties": {
-                  "latitude": {
-                    "type": "number",
-                    "description": "Latitude"
-                  },
-                  "longitude": {
-                    "type": "number",
-                    "description": "Longitude"
-                  },
-                  "imageUrl": {
-                    "type": "string",
-                    "format": "uri",
-                    "description": "Image URL"
-                  },
-                  "website": {
-                    "type": "string",
-                    "format": "uri",
-                    "description": "Website URL"
-                  }
+                  "name": { "type": "string" },
+                  "code": { "type": "string" },
+                  "terminal": { "type": "string" },
+                  "gate": { "type": "string" },
+                  "address": { "type": "string" },
+                  "latitude": { "type": "number", "description": "Latitude" },
+                  "longitude": { "type": "number", "description": "Longitude" },
+                  "imageUrl": { "type": "string", "format": "uri", "description": "Image URL" },
+                  "website": { "type": "string", "format": "uri", "description": "Website URL" }
                 }
               },
               "arrivalAirport": {
                 "type": "object",
                 "properties": {
-                  "latitude": {
-                    "type": "number",
-                    "description": "Latitude"
+                  "name": { "type": "string" },
+                  "code": { "type": "string" },
+                  "terminal": { "type": "string" },
+                  "gate": { "type": "string" },
+                  "address": { "type": "string" },
+                  "latitude": { "type": "number", "description": "Latitude" },
+                  "longitude": { "type": "number", "description": "Longitude" },
+                  "imageUrl": { "type": "string", "format": "uri", "description": "Image URL" },
+                  "website": { "type": "string", "format": "uri", "description": "Website URL" }
+                }
+              },
+              "seatAssignment": { "type": "string" },
+              "class": { "type": "string", "enum": ["Economy", "Premium Economy", "Business", "First"] },
+              "mealPreference": { "type": "string" },
+              "frequentFlyerProgram": { "type": "string" },
+              "frequentFlyerNumber": { "type": "string" },
+              "layovers": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "airport": { "type": "string" },
+                    "duration": { "type": "string" },
+                    "latitude": { "type": "number" },
+                    "longitude": { "type": "number" }
+                  }
+                }
+              },
+              "amenities": { "type": "array", "items": { "type": "string" } }
+            }
+          },
+          "train": {
+            "type": "object",
+            "description": "Train-specific details",
+            "properties": {
+              "operator": { "type": "string" },
+              "trainNumber": { "type": "string" },
+              "trainType": { "type": "string" },
+              "class": { "type": "string" },
+              "departureStation": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "address": { "type": "string" },
+                  "platform": { "type": "string" },
+                  "latitude": { "type": "number", "description": "Latitude" },
+                  "longitude": { "type": "number", "description": "Longitude" },
+                  "imageUrl": { "type": "string", "format": "uri", "description": "Image URL" },
+                  "website": { "type": "string", "format": "uri", "description": "Website URL" }
+                }
+              },
+              "arrivalStation": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "address": { "type": "string" },
+                  "platform": { "type": "string" },
+                  "latitude": { "type": "number", "description": "Latitude" },
+                  "longitude": { "type": "number", "description": "Longitude" },
+                  "imageUrl": { "type": "string", "format": "uri", "description": "Image URL" },
+                  "website": { "type": "string", "format": "uri", "description": "Website URL" }
+                }
+              },
+              "seatAssignment": { "type": "string" },
+              "amenities": { "type": "array", "items": { "type": "string" } },
+              "stops": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "stationName": { "type": "string" },
+                    "arrivalTime": { "type": "string" },
+                    "departureTime": { "type": "string" },
+                    "duration": { "type": "string" },
+                    "latitude": { "type": "number" },
+                    "longitude": { "type": "number" }
+                  }
+                }
+              }
+            }
+          },
+          "bus": {
+            "type": "object",
+            "description": "Bus-specific details",
+            "properties": {
+              "operator": { "type": "string" },
+              "busNumber": { "type": "string" },
+              "busType": { "type": "string" },
+              "departureStation": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "address": { "type": "string" },
+                  "platform": { "type": "string" },
+                  "latitude": { "type": "number", "description": "Latitude" },
+                  "longitude": { "type": "number", "description": "Longitude" },
+                  "imageUrl": { "type": "string", "format": "uri", "description": "Image URL" },
+                  "website": { "type": "string", "format": "uri", "description": "Website URL" }
+                }
+              },
+              "arrivalStation": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "address": { "type": "string" },
+                  "platform": { "type": "string" },
+                  "latitude": { "type": "number", "description": "Latitude" },
+                  "longitude": { "type": "number", "description": "Longitude" },
+                  "imageUrl": { "type": "string", "format": "uri", "description": "Image URL" },
+                  "website": { "type": "string", "format": "uri", "description": "Website URL" }
+                }
+              },
+              "seatAssignment": { "type": "string" },
+              "amenities": { "type": "array", "items": { "type": "string" } },
+              "stops": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "locationName": { "type": "string" },
+                    "arrivalTime": { "type": "string" },
+                    "departureTime": { "type": "string" },
+                    "duration": { "type": "string" },
+                    "latitude": { "type": "number" },
+                    "longitude": { "type": "number" }
+                  }
+                }
+              }
+            }
+          },
+          "rentalCar": {
+            "type": "object",
+            "description": "Rental car-specific details",
+            "properties": {
+              "company": { "type": "string" },
+              "vehicleType": { "type": "string" },
+              "vehicleModel": { "type": "string" },
+              "pickupLocation": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "address": { "type": "string" },
+                  "hours": { "type": "string" },
+                  "latitude": { "type": "number", "description": "Latitude" },
+                  "longitude": { "type": "number", "description": "Longitude" },
+                  "imageUrl": { "type": "string", "format": "uri", "description": "Image URL" },
+                  "website": { "type": "string", "format": "uri", "description": "Website URL" }
+                }
+              },
+              "dropoffLocation": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "address": { "type": "string" },
+                  "hours": { "type": "string" },
+                  "latitude": { "type": "number", "description": "Latitude" },
+                  "longitude": { "type": "number", "description": "Longitude" },
+                  "imageUrl": { "type": "string", "format": "uri", "description": "Image URL" },
+                  "website": { "type": "string", "format": "uri", "description": "Website URL" }
+                }
+              },
+              "insuranceType": { "type": "string" },
+              "fuelPolicy": { "type": "string" },
+              "mileageAllowance": { "type": "string" },
+              "additionalDrivers": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": { "type": "string" },
+                    "license": { "type": "string" }
+                  }
+                }
+              },
+              "extras": { "type": "array", "items": { "type": "string" } },
+              "rentalAgreement": { "type": "string" }
+            }
+          },
+          "ferry": {
+            "type": "object",
+            "description": "Ferry-specific details",
+            "properties": {
+              "operator": { "type": "string" },
+              "vesselName": { "type": "string" },
+              "departurePort": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "address": { "type": "string" },
+                  "terminal": { "type": "string" },
+                  "latitude": { "type": "number", "description": "Latitude" },
+                  "longitude": { "type": "number", "description": "Longitude" },
+                  "imageUrl": { "type": "string", "format": "uri", "description": "Image URL" },
+                  "website": { "type": "string", "format": "uri", "description": "Website URL" }
+                }
+              },
+              "arrivalPort": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "address": { "type": "string" },
+                  "terminal": { "type": "string" },
+                  "latitude": { "type": "number", "description": "Latitude" },
+                  "longitude": { "type": "number", "description": "Longitude" },
+                  "imageUrl": { "type": "string", "format": "uri", "description": "Image URL" },
+                  "website": { "type": "string", "format": "uri", "description": "Website URL" }
+                }
+              },
+              "cabinType": { "type": "string" },
+              "seatType": { "type": "string" },
+              "cabinNumber": { "type": "string" },
+              "vehicleIncluded": { "type": "boolean" },
+              "vehicleDetails": { "type": "string" },
+              "amenities": { "type": "array", "items": { "type": "string" } }
+            }
+          },
+          "cruise": {
+            "type": "object",
+            "description": "Cruise-specific details",
+            "properties": {
+              "cruiseLine": { "type": "string" },
+              "shipName": { "type": "string" },
+              "cabinType": { "type": "string" },
+              "cabinNumber": { "type": "string" },
+              "diningOptions": { "type": "array", "items": { "type": "string" } },
+              "departurePort": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "address": { "type": "string" },
+                  "terminal": { "type": "string" },
+                  "embarkationTime": { "type": "string" },
+                  "latitude": { "type": "number", "description": "Latitude" },
+                  "longitude": { "type": "number", "description": "Longitude" },
+                  "imageUrl": { "type": "string", "format": "uri", "description": "Image URL" },
+                  "website": { "type": "string", "format": "uri", "description": "Website URL" }
+                }
+              },
+              "arrivalPort": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "address": { "type": "string" },
+                  "terminal": { "type": "string" },
+                  "disembarkationTime": { "type": "string" },
+                  "latitude": { "type": "number", "description": "Latitude" },
+                  "longitude": { "type": "number", "description": "Longitude" },
+                  "imageUrl": { "type": "string", "format": "uri", "description": "Image URL" },
+                  "website": { "type": "string", "format": "uri", "description": "Website URL" }
+                }
+              },
+              "portCalls": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "portName": { "type": "string" },
+                    "country": { "type": "string" },
+                    "arrivalDateTime": { "type": "string", "format": "date-time" },
+                    "departureDateTime": { "type": "string", "format": "date-time" },
+                    "latitude": { "type": "number", "description": "Latitude" },
+                    "longitude": { "type": "number", "description": "Longitude" },
+                    "imageUrl": { "type": "string", "format": "uri", "description": "Image URL" },
+                    "website": { "type": "string", "format": "uri", "description": "Website URL" },
+                    "excursions": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": { "type": "string" },"description": { "type": "string" },
+                          "duration": { "type": "string" },
+                          "cost": { "type": "number" },
+                          "bookingStatus": { "type": "string" },
+                          "latitude": { "type": "number", "description": "Latitude" },
+                          "longitude": { "type": "number", "description": "Longitude" },
+                          "imageUrl": { "type": "string", "format": "uri", "description": "Image URL" },
+                          "website": { "type": "string", "format": "uri", "description": "Website URL" }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "onboardActivities": { "type": "array", "items": { "type": "string" } },
+              "packageInclusions": { "type": "array", "items": { "type": "string" } }
+            }
+          },
+          "scenicRoadway": {
+            "type": "object",
+            "description": "Scenic road journey details",
+            "properties": {
+              "routeName": { "type": "string" },
+              "routeDescription": { "type": "string" },
+              "vehicleType": { "type": "string" },
+              "totalDistance": { "type": "string" },
+              "recommendedStops": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": { "type": "string" },
+                    "location": { "type": "string" },
+                    "description": { "type": "string" },
+                    "duration": { "type": "string" },
+                    "distanceFromStart": { "type": "string" },
+                    "latitude": { "type": "number", "description": "Latitude" },
+                    "longitude": { "type": "number", "description": "Longitude" },
+                    "imageUrl": { "type": "string", "format": "uri", "description": "Image URL" },
+                    "website": { "type": "string", "format": "uri", "description": "Website URL" }
+                  }
+                }
+              },
+              "roadConditions": { "type": "string" },
+              "scenicHighlights": { "type": "array", "items": { "type": "string" } },
+              "alternativeRoutes": { "type": "array", "items": { "type": "string" } },
+              "routeCoordinates": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "latitude": { "type": "number" },
+                    "longitude": { "type": "number" }
                   },
-                  "longitude": {
-                    "type": "number",
-                    "description": "Longitude"
-                  },
-                  "imageUrl": {
-                    "type": "string",
-                    "format": "uri",
-                    "description": "Image URL"
-                  },
-                  "website": {
-                    "type": "string",
-                    "format": "uri",
-                    "description": "Website URL"
+                  "required": ["latitude", "longitude"]
+                }
+              }
+            }
+          },
+          "taxi": {
+            "type": "object",
+            "description": "Taxi service details",
+            "properties": {
+              "serviceType": { "type": "string", "enum": ["Standard", "Shared/Grand Taxi", "Private", "App-based"] },
+              "company": { "type": "string" },
+              "vehicleType": { "type": "string" },
+              "departurePoint": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "address": { "type": "string" },
+                  "latitude": { "type": "number", "description": "Latitude" },
+                  "longitude": { "type": "number", "description": "Longitude" },
+                  "imageUrl": { "type": "string", "format": "uri", "description": "Image URL" },
+                  "website": { "type": "string", "format": "uri", "description": "Website URL" }
+                }
+              },
+              "arrivalPoint": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "address": { "type": "string" },
+                  "latitude": { "type": "number", "description": "Latitude" },
+                  "longitude": { "type": "number", "description": "Longitude" },
+                  "imageUrl": { "type": "string", "format": "uri", "description": "Image URL" },
+                  "website": { "type": "string", "format": "uri", "description": "Website URL" }
+                }
+              },
+              "prebooked": { "type": "boolean" },
+              "estimatedFare": { "type": "number" },
+              "maximumPassengers": { "type": "integer" },
+              "contactInfo": { "type": "string" },
+              "appUrl": { "type": "string", "format": "uri" },
+              "baggageAllowance": { "type": "string" }
+            }
+          },
+          "pointsOfInterest": {
+            "type": "array",
+            "description": "Points of interest along the journey",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": { "type": "string" },
+                "type": { "type": "string" },
+                "location": { "type": "string" },
+                "distanceFromRoute": { "type": "string" },
+                "description": { "type": "string" },
+                "visitDuration": { "type": "string" },
+                "entryFee": { "type": "number" },
+                "openingHours": { "type": "string" },
+                "recommendation": { "type": "string" },
+                "latitude": { "type": "number", "description": "Latitude" },
+                "longitude": { "type": "number", "description": "Longitude" },
+                "imageUrl": { "type": "string", "format": "uri", "description": "Image URL" },
+                "website": { "type": "string", "format": "uri", "description": "Website URL" }
+              }
+            }
+          },
+          "tours": {
+            "type": "array",
+            "description": "Available tours during the journey",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": { "type": "string" },
+                "operator": { "type": "string" },
+                "description": { "type": "string" },
+                "duration": { "type": "string" },
+                "cost": { "type": "number" },
+                "bookingStatus": { "type": "string" },
+                "meetingPoint": { "type": "string" },
+                "endPoint": { "type": "string" },
+                "included": { "type": "array", "items": { "type": "string" } },
+                "latitude": { "type": "number", "description": "Latitude" },
+                "longitude": { "type": "number", "description": "Longitude" },
+                "imageUrl": { "type": "string", "format": "uri", "description": "Image URL" },
+                "website": { "type": "string", "format": "uri", "description": "Website URL" }
+              }
+            }
+          },
+          "activities": {
+            "type": "array",
+            "description": "Activities available along the journey",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": { "type": "string" },
+                "type": { "type": "string" },
+                "location": { "type": "string" },
+                "description": { "type": "string" },
+                "duration": { "type": "string" },
+                "cost": { "type": "number" },
+                "bookingStatus": { "type": "string" },
+                "bookingReference": { "type": "string" },
+                "physicalLevel": { "type": "string" },
+                "recommended": { "type": "boolean" },
+                "latitude": { "type": "number", "description": "Latitude" },
+                "longitude": { "type": "number", "description": "Longitude" },
+                "imageUrl": { "type": "string", "format": "uri", "description": "Image URL" },
+                "website": { "type": "string", "format": "uri", "description": "Website URL" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "costs": {
+      "type": "object",
+      "description": "Cost breakdowns for the trip",
+      "required": ["estimated", "actual"],
+      "properties": {
+        "estimated": {
+          "type": "object",
+          "properties": {
+            "currency": { "type": "string" },
+            "totalEstimatedCost": { "type": "number" },
+            "cityCosts": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "cityId": { "type": "string" },
+                  "accommodation": { "type": "number" },
+                  "foodAndDining": { "type": "number" },
+                  "activities": { "type": "number" },
+                  "localTransportation": { "type": "number" },
+                  "shopping": { "type": "number" },
+                  "misc": { "type": "number" },
+                  "subtotal": { "type": "number" }
+                }
+              }
+            },
+            "intraCityCosts": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "transportId": { "type": "string" },
+                  "route": { "type": "string" },
+                  "carrier": { "type": "string" },
+                  "cost": { "type": "number" },
+                  "fees": {
+                    "type": "object",
+                    "properties": {
+                      "baseFare": { "type": "number" },
+                      "taxes": { "type": "number" },
+                      "baggageFees": { "type": "number" }
+                    }
+                  }
+                }
+              }
+            },
+            "categoryCosts": {
+              "type": "object",
+              "properties": {
+                "accommodation": { "type": "number" },
+                "transportation": {
+                  "type": "object",
+                  "properties": {
+                    "flights": { "type": "number" },
+                    "localTransport": { "type": "number" },
+                    "subtotal": { "type": "number" }
+                  }
+                },
+                "foodAndDining": { "type": "number" },
+                "activities": { "type": "number" },
+                "shopping": { "type": "number" },
+                "misc": { "type": "number" }
+              }
+            }
+          }
+        },
+        "actual": {
+          "type": "object",
+          "properties": {
+            "currency": { "type": "string" },
+            "totalActualCost": { "type": "number" },
+            "cityCosts": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "cityId": { "type": "string" },
+                  "accommodation": { "type": "number" },
+                  "foodAndDining": { "type": "number" },
+                  "activities": { "type": "number" },
+                  "localTransportation": { "type": "number" },
+                  "shopping": { "type": "number" },
+                  "misc": { "type": "number" },
+                  "subtotal": { "type": "number" }
+                }
+              }
+            },
+            "intraCityCosts": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "transportId": { "type": "string" },
+                  "route": { "type": "string" },
+                  "carrier": { "type": "string" },
+                  "cost": { "type": "number" },
+                  "fees": {
+                    "type": "object",
+                    "properties": {
+                      "baseFare": { "type": "number" },
+                      "taxes": { "type": "number" },
+                      "baggageFees": { "type": "number" }
+                    }
+                  }
+                }
+              }
+            },
+            "categoryCosts": {
+              "type": "object",
+              "properties": {
+                "accommodation": { "type": "number" },
+                "transportation": {
+                  "type": "object",
+                  "properties": {
+                    "flights": { "type": "number" },
+                    "localTransport": { "type": "number" },
+                    "subtotal": { "type": "number" }
+                  }
+                },
+                "foodAndDining": { "type": "number" },
+                "activities": { "type": "number" },
+                "shopping": { "type": "number" },
+                "misc": { "type": "number" }
+              }
+            }
+          }
+        },
+        "budget": {
+          "type": "object",
+          "properties": {
+            "currency": { "type": "string" },
+            "dailyBudget": { "type": "number" },
+            "totalBudget": { "type": "number" },
+            "budgetCategories": {
+              "type": "object",
+              "properties": {
+                "accommodation": { "type": "number" },
+                "transportation": { "type": "number" },
+                "food": { "type": "number" },
+                "activities": { "type": "number" },
+                "shopping": { "type": "number" },
+                "emergencyFund": { "type": "number" },
+                "misc": { "type": "number" }
+              }
+            },
+            "budgetNotes": { "type": "string" }
+          }
+        },
+        "expenses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "expenseId": { "type": "string" },
+              "date": { "type": "string", "format": "date" },
+              "category": { "type": "string", "enum": ["Accommodation", "Transportation", "Food", "Activities", "Shopping", "Misc"] },
+              "description": { "type": "string" },
+              "amount": { "type": "number" },
+              "currency": { "type": "string" },
+              "exchangeRate": { "type": "number" },
+              "amountInHomeCurrency": { "type": "number" },
+              "city": { "type": "string" },
+              "paymentMethod": { "type": "string" },
+              "isPaid": { "type": "boolean" },
+              "receiptPhoto": { "type": "string", "format": "uri" },
+              "notes": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Information about the itinerary document",
+      "properties": {
+        "createdDate": { "type": "string", "format": "date" },
+        "lastModifiedDate": { "type": "string", "format": "date" },
+        "version": { "type": "string" },
+        "status": { "type": "string", "enum": ["Draft", "Confirmed", "Completed", "Cancelled"] },
+        "language": { "type": "string", "description": "Language code (e.g., en, fr, es)" },
+        "locale": { "type": "string", "description": "Locale for formatting (e.g., en-US, fr-FR)" },
+        "downloadUrl": { "type": "string", "format": "uri", "description": "URL to download the complete JSON file" }
+      }
+    },
+    "extendedInformation": {
+      "type": "object",
+      "description": "Optional additional information that can be included",
+      "properties": {
+        "downloadOptions": {
+          "type": "object",
+          "description": "Options for downloading the complete itinerary data",
+          "properties": {
+            "jsonUrl": { "type": "string", "format": "uri", "description": "URL to download the complete JSON file" },
+            "pdfUrl": { "type": "string", "format": "uri", "description": "URL to download a PDF version of the itinerary" },
+            "icalUrl": { "type": "string", "format": "uri", "description": "URL to download calendar events for the itinerary" },
+            "kmlUrl": { "type": "string", "format": "uri", "description": "URL to download geographic data in KML format" }
+          }
+        },
+        "travelInsurance": {
+          "type": "object",
+          "properties": {
+            "provider": { "type": "string" },
+            "policyNumber": { "type": "string" },
+            "coverageDetails": { "type": "string" },
+            "emergencyContact": { "type": "string" },
+            "documents": { "type": "string", "format": "uri" }
+          }
+        },
+        "travelDocuments": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "documentType": { "type": "string", "enum": ["Passport", "Visa", "Vaccination", "Insurance", "Other"] },
+              "documentNumber": { "type": "string" },
+              "expiryDate": { "type": "string", "format": "date" },
+              "issueDate": { "type": "string", "format": "date" },
+              "documentUrl": { "type": "string", "format": "uri" },
+              "notes": { "type": "string" }
+            }
+          }
+        },
+        "contactInformation": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": { "type": "string", "enum": ["Accommodation", "Transportation", "Emergency", "Local Contact", "Other"] },
+              "name": { "type": "string" },
+              "phoneNumber": { "type": "string" },
+              "email": { "type": "string" },
+              "address": { "type": "string" },
+              "website": { "type": "string", "format": "uri" },
+              "notes": { "type": "string" }
+            }
+          }
+        },
+        "travelTips": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "category": { "type": "string", "enum": ["General", "Safety", "Transportation", "Food", "Culture", "Shopping", "Communication", "Other"] },
+              "tip": { "type": "string" },
+              "source": { "type": "string" }
+            }
+          }
+        },
+        "weatherInfo": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "city": { "type": "string" },
+              "month": { "type": "string" },
+              "averageHighTemp": { "type": "number" },
+              "averageLowTemp": { "type": "number" },
+              "tempUnit": { "type": "string", "enum": ["Celsius", "Fahrenheit"] },
+              "averageRainfall": { "type": "number" },
+              "rainfallUnit": { "type": "string", "enum": ["mm", "inches"] },
+              "seasonalNotes": { "type": "string" }
+            }
+          }
+        },
+        "languageInfo": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "country": { "type": "string" },
+              "officialLanguages": { "type": "array", "items": { "type": "string" } },
+              "usefulPhrases": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "english": { "type": "string" },
+                    "local": { "type": "string" },
+                    "pronunciation": { "type": "string" },
+                    "category": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "notes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "title": { "type": "string" },
+              "content": { "type": "string" },
+              "category": { "type": "string" },
+              "timestamp": { "type": "string", "format": "date-time" }
+            }
+          }
+        },
+        "packingList": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "category": { "type": "string", "enum": ["Clothing", "Toiletries", "Electronics", "Documents", "Medicine", "Misc"] },
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": { "type": "string" },
+                    "quantity": { "type": "integer" },
+                    "isPacked": { "type": "boolean" },
+                    "notes": { "type": "string" }
                   }
                 }
               }
